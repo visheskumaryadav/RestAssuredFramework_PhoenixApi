@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Phoenix API Test Suite" verbose="1">
+  
+    <test name="Inwarrenty Flow">
+    <classes>
+      <class name="com.api.tests.LoginApiTest"/>
+      <class name="com.api.tests.UserDetailsApiTest"/>
+      <class name="com.api.tests.CountApiTest"/>
+      <class name="com.api.tests.MasterApiTest"/>
+
+      
+    </classes>
+  </test>
+</suite>

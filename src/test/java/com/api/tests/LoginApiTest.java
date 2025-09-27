@@ -1,4 +1,4 @@
-package com.api.test;
+package com.api.tests;
 
 import static io.restassured.RestAssured.*;
 
@@ -17,7 +17,6 @@ public class LoginApiTest {
 
 	@Test
 	public void loginApiTest() {
-		System.out.println(System.getProperty("env","gggg"));
 		UserCredentials userCredentials =new UserCredentials("iamfd","password");
 		given()
 		.baseUri(getProperty("BASE_URL"))
