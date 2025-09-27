@@ -2,7 +2,7 @@
 
 <suite name="Phoenix API Test Suite" verbose="1">
   
-    <test name="Inwarrenty Flow">
+    <test name="Inwarranty Flow">
     <classes>
       <class name="com.api.tests.LoginApiTest"/>
       <class name="com.api.tests.UserDetailsApiTest"/>
