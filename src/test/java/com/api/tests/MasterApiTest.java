@@ -3,6 +3,8 @@ package com.api.tests;
 import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
+import com.api.utils.SpecUtil;
+
 import static com.api.constants.Role.*;
 import static com.api.utils.AuthTokenProvider.*;
 import static com.api.utils.ConfigManager.*;
@@ -17,22 +19,15 @@ public class MasterApiTest {
 	
 	@Test
 	public void masterApiTest() {
-		Header authHeader=new Header("Authorization",getToken(FD));
 		
 		given()
-		.baseUri(getProperty("BASE_URL"))
-		.contentType("")
-		.accept(ContentType.JSON)
-		.header(authHeader)
-		.log().uri().log().headers().log().body()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 		.post("master")
 		.then()
-		.log().all()
-		.statusCode(200)
+		.spec(SpecUtil.responseSpec_Ok())
 		.body("message", equalTo("Success"))
 		.body("data", notNullValue())
-		.time(lessThan(1000L))
 		.body("$", hasKey("data"))
 		.body("data", hasKey("mst_oem"))
 		.body("data", hasKey("mst_model"))
@@ -45,15 +40,10 @@ public class MasterApiTest {
 	@Test
 	public void masterApiInvalidToken() {
 		given()
-		.baseUri(getProperty("BASE_URL"))
-		.contentType("")
-		.accept(ContentType.JSON)
-		.header("","")
-		.log().uri().log().headers().log().body()
+		.spec(SpecUtil.RequestSpec())
 		.when()
 		.post("master")
 		.then()
-		.log().all()
-		.statusCode(401);
+		.spec(SpecUtil.responseSpec_TEXT(401));
 	}
 }
