@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import static com.api.constants.Role.*;
 import static com.api.utils.AuthTokenProvider.*;
 import com.api.utils.ConfigManager;
+import com.api.utils.SpecUtil;
 
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
@@ -19,19 +20,13 @@ public class CountApiTest {
 
 	@Test
 	public void verifyCountApiResponse() {
-		Header authHeader=new Header("Authorization",getToken(FD));
+		
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URL"))
-		.accept(ContentType.JSON)
-		.contentType(ContentType.JSON)
-		.header(authHeader)
-		.log().uri().log().headers().log().body()
+		.spec(SpecUtil.requestSpecWithAuth(FD))
 		.when()
 		.get("dashboard/count")
 		.then()
-		.log().body()
-		.statusCode(200)
-		.time(lessThan(1000L))
+		.spec(SpecUtil.responseSpec_Ok())
 		.body("message",equalTo("Success"))
 		.body("data", notNullValue())
 		.body("data.size()",equalTo(3))
@@ -44,14 +39,10 @@ public class CountApiTest {
 	@Test
 	public void countApiTestMissingAuthToken() {
 		given()
-		.baseUri(ConfigManager.getProperty("BASE_URL"))
-		.accept(ContentType.JSON)
-		.contentType(ContentType.JSON)
-		.log().all()
+		.spec(SpecUtil.RequestSpec())
 		.when()
 		.get("dashboard/count")
 		.then()
-		.log().all()
-		.statusCode(401);
+		.spec(SpecUtil.responseSpec_TEXT(401));
 	}
 }

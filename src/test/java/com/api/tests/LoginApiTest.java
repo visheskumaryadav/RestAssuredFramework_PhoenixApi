@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.*;
 import org.testng.annotations.Test;
 
 import com.api.pojo.UserCredentials;
+import com.api.utils.SpecUtil;
+
 import static com.api.utils.ConfigManager.*;
 
 
@@ -19,19 +21,10 @@ public class LoginApiTest {
 	public void loginApiTest() {
 		UserCredentials userCredentials =new UserCredentials("iamfd","password");
 		given()
-		.baseUri(getProperty("BASE_URL"))
-		.and()
-		.contentType(ContentType.JSON)
-		.accept(ContentType.JSON)
-		.body(userCredentials)
-		.log().uri()
-		.log().headers()
-		.log().body()
+		.spec(SpecUtil.RequestSpec(userCredentials))
 		.and()
 		.post("login")
-		.then().log().body()
-		.statusCode(200)
-		.time(lessThan(1000L))
+		.then().spec(SpecUtil.responseSpec_Ok())
 		.body("message", equalTo("Success"))
 		.and()
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
