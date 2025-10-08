@@ -6,7 +6,7 @@ import static org.hamcrest.Matchers.*;
 
 import org.testng.annotations.Test;
 
-import com.api.pojo.UserCredentials;
+import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
 
 import static com.api.utils.ConfigManager.*;
@@ -29,5 +29,5 @@ public class LoginApiTest {
 		.and()
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/LoginResponseSchema.json"));
 		}
-
+	
 }

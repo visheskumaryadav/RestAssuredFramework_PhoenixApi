@@ -10,11 +10,12 @@ import java.util.List;
 
 import org.testng.annotations.Test;
 
-import com.api.pojo.CreateJobPayload;
-import com.api.pojo.Customer;
-import com.api.pojo.CustomerAddress;
-import com.api.pojo.CustomerProduct;
-import com.api.pojo.Problems;
+import com.api.request.model.CreateJobPayload;
+import com.api.request.model.Customer;
+import com.api.request.model.CustomerAddress;
+import com.api.request.model.CustomerProduct;
+import com.api.request.model.Problems;
+import com.api.utils.DateTimeUtil;
 import com.api.utils.SpecUtil;
 
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -28,7 +29,7 @@ public class CreateJobApiTest {
 		// Create the CreateJobPayload object and it will be same record too
 		Customer customer=new Customer("rahul", "ssharma", "123456789012", "", "rahul@yopmail.com", ""); 
 		CustomerAddress customerAddress=new CustomerAddress("C 304", "Jupiter", "MG Road", "Bangur Nagar", "Goregaon West","411039", "India", "Maharashtra");
-		CustomerProduct customerProduct=new CustomerProduct("2025-04-06T18:30:00.000Z", "SN223422733055", "356789072255378", "333785579225679", "2025-04-06T18:30:00.000Z",1,1);
+		CustomerProduct customerProduct=new CustomerProduct(DateTimeUtil.getTimeWithDaysAgo(5), "SN243422733055", "356789072245378", "333785579225679", DateTimeUtil.getTimeWithDaysAgo(5),1,1);
 		Problems problems=new Problems(1, "Battery Issue");
 		List<Problems> problemsList=new ArrayList<>();
 		problemsList.add(problems);
