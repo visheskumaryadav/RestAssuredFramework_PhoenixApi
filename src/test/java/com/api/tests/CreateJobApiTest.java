@@ -7,8 +7,6 @@ import static org.hamcrest.Matchers.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ServiceLoader;
-
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

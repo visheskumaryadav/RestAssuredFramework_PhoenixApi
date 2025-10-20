@@ -6,12 +6,8 @@ import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import static com.api.constants.Role.*;
-import static com.api.utils.AuthTokenProvider.*;
-import com.api.utils.ConfigManager;
 import com.api.utils.SpecUtil;
 
-import io.restassured.http.ContentType;
-import io.restassured.http.Header;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 import static io.restassured.RestAssured.*;

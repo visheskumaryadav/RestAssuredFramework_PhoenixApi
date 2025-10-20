@@ -10,10 +10,6 @@ import org.testng.annotations.Test;
 import com.api.request.model.UserCredentials;
 import com.api.utils.SpecUtil;
 
-import static com.api.utils.ConfigManager.*;
-
-
-import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class LoginApiTest {
