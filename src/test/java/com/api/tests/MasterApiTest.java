@@ -17,7 +17,7 @@ import static io.restassured.RestAssured.*;
 
 public class MasterApiTest {
 	
-	@Test
+	@Test(description = "Verify if master  api response is shown correctly",groups = {"api","smoke","regression"})
 	public void masterApiTest() {
 		
 		given()
@@ -37,7 +37,7 @@ public class MasterApiTest {
 		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/MasterApiResponseSchema_FD.json"));
 	}
 	
-	@Test
+	@Test(description = "Verify if master  api gives correct status code for invalid token",groups = {"api","negative","smoke","regression"})
 	public void masterApiInvalidToken() {
 		given()
 		.spec(SpecUtil.RequestSpec())
