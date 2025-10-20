@@ -20,7 +20,7 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class UserDetailsApiTest {
 
-	@Test
+	@Test(description = "Verify if userdetails api response is shown correctly",groups = {"api","smoke","regression"})
 	public void userDetailsApiTest() {
 
 		given()
