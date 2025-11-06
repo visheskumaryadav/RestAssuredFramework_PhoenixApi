@@ -1,6 +1,6 @@
 package com.demo.csv;
 
-public class UserPOJO {
+public class UserBean {
 	/*
 	 * In pojo for csv mapping keeping the instance variable names same as column names
 	 * if they are different then mapping wont happen
@@ -9,18 +9,22 @@ public class UserPOJO {
 	 * e.g.
 	 *  @CsvBindByName(column ="username")
 	 *  private String x;
+	 *  
+	 *  
+	 *  Bean vs POJO -> Bean is also a POJO but here no-argument constructor is compulsory whereas in POJO it is optional
+	 *  We don't need parameterized constructor in Bean but we may need in POJO
 	 */
 	private String username;
 	private String password;
-	public UserPOJO() {
+	public UserBean() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UserPOJO(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
+//	public UserPOJO(String username, String password) {
+//		super();
+//		this.username = username;
+//		this.password = password;
+//	}
 
 	public String getUsername() {
 		return username;
@@ -36,7 +40,7 @@ public class UserPOJO {
 
 	@Override
 	public String toString() {
-		return "UserPOJO [username=" + username + ", password=" + password + "]";
+		return "UserBean [username=" + username + ", password=" + password + "]";
 	}
 
 	public void setPassword(String password) {
