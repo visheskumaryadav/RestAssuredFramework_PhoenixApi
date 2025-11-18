@@ -1,4 +1,4 @@
-package com.demo.csv;
+package com.dataproviders.api.bean;
 
 public class UserBean {
 	/*
