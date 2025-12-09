@@ -2,6 +2,7 @@ package com.api.utils;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.List;
 
 import com.dataproviders.api.bean.UserBean;
@@ -20,7 +21,7 @@ public class CSVReaderUtil {
 		// No one can create Object of CSVReaderUtil Outside the class
 	}
 	
-	public static void loadCSV(String pathOfCSVFile) {
+	public static Iterator<UserBean> loadCSV(String pathOfCSVFile) {
 		// Code to read the CSV file in java
 		InputStream is=Thread.currentThread().getContextClassLoader().getResourceAsStream(pathOfCSVFile);
 //		File csvFile=new File("C:\\Users\\vishes.kumar.yadav\\eclipse-workspace\\PhoenixApiAutomationFramework\\src\\main\\resources\\testData\\LoginCred.csv");
@@ -33,7 +34,10 @@ public class CSVReaderUtil {
 				.withIgnoreEmptyLine(true)
 				.build();
 		List<UserBean> userList=csvToBean.parse();
-		System.out.println(userList);
-		System.out.println(userList.get(0).getUsername());
+		return userList.iterator(); // Because we are passing it to data provider and as it is list so we are using iterator
+		
+//		System.out.println(userList);
+//		System.out.println(userList.get(0).getUsername());
+		
 	}
 }
