@@ -17,6 +17,9 @@ public class LoginApiDataDrivenTest {
 
 /*
  * When we link a test with data provider then that test becomes parameterized test method
+ * @DataProvider is only applicable with @Test method we can't use it with other annotations
+ * If we create dataprovider in the same test class then use non-static method and if it is different class then use
+ * static method
  */
 	@Test(description = "Verifying if login api is working for FD user",
 			groups = {"datadriven","api","regression"},
