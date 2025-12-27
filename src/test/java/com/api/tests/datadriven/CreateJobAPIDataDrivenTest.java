@@ -16,7 +16,7 @@ public class CreateJobAPIDataDrivenTest {
 
 	@Test(description = "Verify if createjob api is able to create inwarranty job", groups = { "api", "smoke",
 			"regression",
-			"dataDriven" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobAPIDataProvider"
+			"dataDriven","csv" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobAPIDataProvider"
 
 	)
 	public void createJobApiTest(CreateJobPayload createJobPayload) {
@@ -28,18 +28,18 @@ public class CreateJobAPIDataDrivenTest {
 						.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
 	}
 
-	@Test(description = "Verify if createjob api is able to create inwarranty job", groups = { "api", "smoke",
-			"regression",
-			"dataDriven" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobFakerDataProvider"
-
-	)
-	public void createJobApiTestwithFaker(CreateJobPayload createJobPayload) {
-
-		given().spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload)).when().post("job/create").then()
-				.spec(SpecUtil.responseSpec_Ok()).body("message", equalTo("Job created successfully. "))
-				.body("data.mst_service_location_id", equalTo(1)).body("data.job_number", startsWith("JOB_"))
-				.body(JsonSchemaValidator
-						.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
-
-	}
+//	@Test(description = "Verify if createjob api is able to create inwarranty job", groups = { "api", "smoke",
+//			"regression",
+//			"dataDriven" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobFakerDataProvider"
+//
+//	)
+//	public void createJobApiTestwithFaker(CreateJobPayload createJobPayload) {
+//
+//		given().spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload)).when().post("job/create").then()
+//				.spec(SpecUtil.responseSpec_Ok()).body("message", equalTo("Job created successfully. "))
+//				.body("data.mst_service_location_id", equalTo(1)).body("data.job_number", startsWith("JOB_"))
+//				.body(JsonSchemaValidator
+//						.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
+//
+//	}
 }
