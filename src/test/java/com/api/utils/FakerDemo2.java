@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import com.api.constants.Problem;
 import com.api.request.model.CreateJobPayload;
 import com.api.request.model.Customer;
 import com.api.request.model.CustomerAddress;
