@@ -13,6 +13,8 @@ import com.api.request.model.CustomerProduct;
 import com.api.request.model.Problems;
 import com.github.javafaker.Faker;
 
+import groovyjarjarantlr4.v4.parse.ANTLRParser.finallyClause_return;
+
 public class FakerDataGenerator {
 	private static Faker faker = new Faker(new Locale("en-IND"));
 	private final static String COUNTRY = "India";
@@ -23,6 +25,8 @@ public class FakerDataGenerator {
 	private static final int MST_OEM_ID = 1;
 	private static final int PRODUCT_ID = 1;
 	private static final int MST_MODEL_ID = 1;
+	private static final int VALID_PROBLEMS_ID[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 19, 20, 22, 24,
+			26, 27, 28, 29 };
 
 	private FakerDataGenerator() {
 
@@ -37,9 +41,10 @@ public class FakerDataGenerator {
 				MST_WARRANTY_STATUS_ID, MST_OEM_ID, customer, customerAddress, customerProduct, problemsList);
 		return createJobPayload;
 	}
+
 	public static Iterator<CreateJobPayload> generateFakeCreateJobData(int count) {
-		List<CreateJobPayload> createJobPayloadList=new ArrayList<CreateJobPayload>();
-		for(int i=1;i<=count;i++) {
+		List<CreateJobPayload> createJobPayloadList = new ArrayList<CreateJobPayload>();
+		for (int i = 1; i <= count; i++) {
 			Customer customer = generateFakeCustomerData();
 			CustomerAddress customerAddress = generateFakeCustomerAddressData();
 			CustomerProduct customerProduct = generateFakeCustomerProductData();
@@ -48,15 +53,14 @@ public class FakerDataGenerator {
 					MST_WARRANTY_STATUS_ID, MST_OEM_ID, customer, customerAddress, customerProduct, problemsList);
 			createJobPayloadList.add(createJobPayload);
 		}
-		
+
 		return createJobPayloadList.iterator();
 	}
 
-	
 	private static List<Problems> generateFakeProblemsListData() {
-		int id = random.nextInt(26) + 1;
+		int id = random.nextInt(VALID_PROBLEMS_ID.length);
 		String remark = faker.lorem().sentence(10);
-		Problems problem = new Problems(id, remark);
+		Problems problem = new Problems(VALID_PROBLEMS_ID[id], remark);
 		List<Problems> problemsList = new ArrayList<Problems>();
 		problemsList.add(problem);
 		return problemsList;
