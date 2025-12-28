@@ -13,26 +13,33 @@ import com.api.utils.SpecUtil;
 import io.restassured.module.jsv.JsonSchemaValidator;
 
 public class CreateJobAPIDataDrivenTest {
-	
-	
-	@Test(description = "Verify if createjob api is able to create inwarranty job",
-			groups = {"api","smoke","regression","dataDriven"},
-			dataProviderClass = com.dataproviders.DataProviderUtils.class,
-			dataProvider = "CreateJobAPIDataProvider"
-	
+
+	@Test(description = "Verify if createjob api is able to create inwarranty job", groups = { "api", "smoke",
+			"regression",
+			"dataDriven","csv" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobAPIDataProvider"
+
 	)
 	public void createJobApiTest(CreateJobPayload createJobPayload) {
-		
-		
-		
-		given()
-		.spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload))
-		.when()
-		.post("job/create")
-		.then().spec(SpecUtil.responseSpec_Ok())
-		.body("message", equalTo("Job created successfully. "))
-		.body("data.mst_service_location_id", equalTo(1))
-		.body("data.job_number",startsWith("JOB_"))
-		.body(JsonSchemaValidator.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
+
+		given().spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload)).when().post("job/create").then()
+				.spec(SpecUtil.responseSpec_Ok()).body("message", equalTo("Job created successfully. "))
+				.body("data.mst_service_location_id", equalTo(1)).body("data.job_number", startsWith("JOB_"))
+				.body(JsonSchemaValidator
+						.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
 	}
+
+//	@Test(description = "Verify if createjob api is able to create inwarranty job", groups = { "api", "smoke",
+//			"regression",
+//			"dataDriven" }, dataProviderClass = com.dataproviders.DataProviderUtils.class, dataProvider = "CreateJobFakerDataProvider"
+//
+//	)
+//	public void createJobApiTestwithFaker(CreateJobPayload createJobPayload) {
+//
+//		given().spec(SpecUtil.requestSpecWithAuth(FD, createJobPayload)).when().post("job/create").then()
+//				.spec(SpecUtil.responseSpec_Ok()).body("message", equalTo("Job created successfully. "))
+//				.body("data.mst_service_location_id", equalTo(1)).body("data.job_number", startsWith("JOB_"))
+//				.body(JsonSchemaValidator
+//						.matchesJsonSchemaInClasspath("response-schema/CreateJobApiResponseSchema.json"));
+//
+//	}
 }
