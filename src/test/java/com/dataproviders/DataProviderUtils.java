@@ -67,4 +67,12 @@ public class DataProviderUtils {
 
 	}
 
+	@DataProvider(name = "CreateJobAPIJsonDataProvider", parallel = true)
+	public static Iterator<CreateJobPayload> createJobAPIJsonDataProvider() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		return JsonReaderUtil.loadJSON("testData/CreateJobAPIData.json", CreateJobPayload[].class);
+
+	}
 }
