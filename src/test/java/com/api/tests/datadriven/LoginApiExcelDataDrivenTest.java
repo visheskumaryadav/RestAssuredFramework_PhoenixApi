@@ -24,12 +24,12 @@ public class LoginApiExcelDataDrivenTest {
 	@Test(description = "Verifying if login api is working for FD user",
 			groups = {"datadriven","api","regression"},
 	        dataProviderClass = com.dataproviders.DataProviderUtils.class,
-	        dataProvider = "LoginAPIExcelDataProvider"
+	        dataProvider = "LoginAPIExcelDataProviderUsingPoiji"
 			)
-	public void loginApiTest(UserCredentials userCredentials) {
+	public void loginApiTest(UserBean userBean) {
 		
 		given()
-		.spec(SpecUtil.RequestSpec(userCredentials))
+		.spec(SpecUtil.RequestSpec(userBean))
 		.and()
 		.post("login")
 		.then().spec(SpecUtil.responseSpec_Ok())

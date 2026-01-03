@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -12,6 +13,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.api.request.model.UserCredentials;
+import com.dataproviders.api.bean.UserBean;
+import com.poiji.bind.Poiji;
 
 public class ExcelReaderUtil2 {
 
@@ -19,10 +22,9 @@ public class ExcelReaderUtil2 {
 
 	}
 
-	public static Iterator<UserCredentials> loadExcelData(String fileName)  {
-		// Apache POI OOXML LIB	
-		InputStream is = Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream(fileName);
+	public static Iterator<UserCredentials> loadExcelDataUsingPOI(String fileName) {
+		// Apache POI OOXML LIB
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
 
 		XSSFWorkbook myWorkbook = null;
 		try {
@@ -69,5 +71,30 @@ public class ExcelReaderUtil2 {
 			userList.add(userCredentials);
 		}
 		return userList.iterator();
+
 	}
+
+	public static <T> Iterator<T> loadExcelDataUsingPOIJI(String fileName,String sheetName,Class<T> clazz) {
+		// Below code is based on POIJI
+
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName);
+
+		XSSFWorkbook myWorkbook = null;
+		try {
+			myWorkbook = new XSSFWorkbook(is);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// focus on sheet
+
+		XSSFSheet mySheet = myWorkbook.getSheet(sheetName);
+
+		// Below code is based on POIJI
+
+		List<T> dataList = Poiji.fromExcel(mySheet, clazz);
+		return dataList.iterator();
+	}
+
 }

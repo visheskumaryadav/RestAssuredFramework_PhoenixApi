@@ -77,12 +77,21 @@ public class DataProviderUtils {
 
 	}
 
-	@DataProvider(name = "LoginAPIExcelDataProvider", parallel = true)
-	public static Iterator<UserCredentials> loginAPIExcelDataProvider() {
+	@DataProvider(name = "LoginAPIExcelDataProviderUsingPoiji", parallel = true)
+	public static Iterator<UserBean> loginAPIExcelDataProviderUsingPoiji() {
 		// If we don't provide the name of @DataProvider then name of the method becomes
 		// the name of data provider
 		// Return type of data provider should return something
-		return ExcelReaderUtil2.loadExcelData("testData/phoenixTestData.xlsx");
+		return ExcelReaderUtil2.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx","LoginTestData",UserBean.class);
+
+	}
+	
+	@DataProvider(name = "LoginAPIExcelDataProviderUsingPoi", parallel = true)
+	public static Iterator<UserCredentials> loginAPIExcelDataProviderUsingPoi() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		return ExcelReaderUtil2.loadExcelDataUsingPOI("testData/phoenixTestData.xlsx");
 
 	}
 }
