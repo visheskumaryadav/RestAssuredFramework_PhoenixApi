@@ -10,7 +10,7 @@ import com.api.request.model.CreateJobPayload;
 import com.api.request.model.UserCredentials;
 import com.api.utils.CSVReaderUtil;
 import com.api.utils.CreateJobBeanMapper;
-import com.api.utils.ExcelReaderUtil2;
+import com.api.utils.ExcelReaderUtil;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.JsonReaderUtil;
 import com.dataproviders.api.bean.CreateJobBean;
@@ -82,7 +82,7 @@ public class DataProviderUtils {
 		// If we don't provide the name of @DataProvider then name of the method becomes
 		// the name of data provider
 		// Return type of data provider should return something
-		return ExcelReaderUtil2.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "LoginTestData",
+		return ExcelReaderUtil.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "LoginTestData",
 				UserBean.class);
 
 	}
@@ -93,7 +93,7 @@ public class DataProviderUtils {
 		// the name of data provider
 		// Return type of data provider should return something
 		ArrayList<CreateJobPayload> createJobPayloads = new ArrayList<CreateJobPayload>();
-		Iterator<CreateJobBean> createJobIterator = ExcelReaderUtil2
+		Iterator<CreateJobBean> createJobIterator = ExcelReaderUtil
 				.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "CreateJobTestData", CreateJobBean.class);
 		CreateJobBean createJobBean;
 		CreateJobPayload createJobPayload;
@@ -112,7 +112,7 @@ public class DataProviderUtils {
 		// If we don't provide the name of @DataProvider then name of the method becomes
 		// the name of data provider
 		// Return type of data provider should return something
-		return ExcelReaderUtil2.loadExcelDataUsingPOI("testData/phoenixTestData.xlsx");
+		return ExcelReaderUtil.loadExcelDataUsingPOI("testData/phoenixTestData.xlsx");
 
 	}
 
