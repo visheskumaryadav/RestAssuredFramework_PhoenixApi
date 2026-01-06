@@ -82,10 +82,31 @@ public class DataProviderUtils {
 		// If we don't provide the name of @DataProvider then name of the method becomes
 		// the name of data provider
 		// Return type of data provider should return something
-		return ExcelReaderUtil2.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx","LoginTestData",UserBean.class);
+		return ExcelReaderUtil2.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "LoginTestData",
+				UserBean.class);
 
 	}
-	
+
+	@DataProvider(name = "CreateJobExcelDataProviderUsingPoiji", parallel = true)
+	public static Iterator<CreateJobPayload> createJobExcelDataProviderUsingPoiji() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		ArrayList<CreateJobPayload> createJobPayloads = new ArrayList<CreateJobPayload>();
+		Iterator<CreateJobBean> createJobIterator = ExcelReaderUtil2
+				.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "CreateJobTestData", CreateJobBean.class);
+		CreateJobBean createJobBean;
+		CreateJobPayload createJobPayload;
+		while (createJobIterator.hasNext()) {
+			createJobBean = createJobIterator.next();
+			createJobPayload = CreateJobBeanMapper.mapper(createJobBean);
+			createJobPayloads.add(createJobPayload);
+		}
+
+		return createJobPayloads.iterator();
+
+	}
+
 	@DataProvider(name = "LoginAPIExcelDataProviderUsingPoi", parallel = true)
 	public static Iterator<UserCredentials> loginAPIExcelDataProviderUsingPoi() {
 		// If we don't provide the name of @DataProvider then name of the method becomes
@@ -94,4 +115,5 @@ public class DataProviderUtils {
 		return ExcelReaderUtil2.loadExcelDataUsingPOI("testData/phoenixTestData.xlsx");
 
 	}
+
 }
