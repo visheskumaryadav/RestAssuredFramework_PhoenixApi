@@ -10,6 +10,7 @@ import com.api.request.model.CreateJobPayload;
 import com.api.request.model.UserCredentials;
 import com.api.utils.CSVReaderUtil;
 import com.api.utils.CreateJobBeanMapper;
+import com.api.utils.ExcelReaderUtil;
 import com.api.utils.FakerDataGenerator;
 import com.api.utils.JsonReaderUtil;
 import com.dataproviders.api.bean.CreateJobBean;
@@ -75,4 +76,44 @@ public class DataProviderUtils {
 		return JsonReaderUtil.loadJSON("testData/CreateJobAPIData.json", CreateJobPayload[].class);
 
 	}
+
+	@DataProvider(name = "LoginAPIExcelDataProviderUsingPoiji", parallel = true)
+	public static Iterator<UserBean> loginAPIExcelDataProviderUsingPoiji() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		return ExcelReaderUtil.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "LoginTestData",
+				UserBean.class);
+
+	}
+
+	@DataProvider(name = "CreateJobExcelDataProviderUsingPoiji", parallel = true)
+	public static Iterator<CreateJobPayload> createJobExcelDataProviderUsingPoiji() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		ArrayList<CreateJobPayload> createJobPayloads = new ArrayList<CreateJobPayload>();
+		Iterator<CreateJobBean> createJobIterator = ExcelReaderUtil
+				.loadExcelDataUsingPOIJI("testData/phoenixTestData.xlsx", "CreateJobTestData", CreateJobBean.class);
+		CreateJobBean createJobBean;
+		CreateJobPayload createJobPayload;
+		while (createJobIterator.hasNext()) {
+			createJobBean = createJobIterator.next();
+			createJobPayload = CreateJobBeanMapper.mapper(createJobBean);
+			createJobPayloads.add(createJobPayload);
+		}
+
+		return createJobPayloads.iterator();
+
+	}
+
+	@DataProvider(name = "LoginAPIExcelDataProviderUsingPoi", parallel = true)
+	public static Iterator<UserCredentials> loginAPIExcelDataProviderUsingPoi() {
+		// If we don't provide the name of @DataProvider then name of the method becomes
+		// the name of data provider
+		// Return type of data provider should return something
+		return ExcelReaderUtil.loadExcelDataUsingPOI("testData/phoenixTestData.xlsx");
+
+	}
+
 }
