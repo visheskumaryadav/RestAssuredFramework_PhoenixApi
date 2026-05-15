@@ -81,6 +81,18 @@
 			<artifactId>poiji</artifactId>
 			<version>5.2.0</version>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+<dependency>
+    <groupId>com.mysql</groupId>
+    <artifactId>mysql-connector-j</artifactId>
+    <version>9.7.0</version>
+    <scope>compile</scope>
+</dependency>
+<dependency>
+   <groupId>com.zaxxer</groupId>
+   <artifactId>HikariCP</artifactId>
+   <version>7.0.2</version>
+</dependency>
 	</dependencies>
 
 </project>
